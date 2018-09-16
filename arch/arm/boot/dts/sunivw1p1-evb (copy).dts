@@ -1,0 +1,85 @@
+/*
+ * Allwinner Technology CO., Ltd. sunivw1p1 evb board.
+ *
+ * evb board support.
+ */
+
+/dts-v1/;
+#include "sunivw1p1.dtsi"
+
+/ {
+
+  	memory@80000000 {
+		reg = <0x00000000 0x80000000 0x00000000 0x2000000>;
+	};
+
+	soc: soc {
+	  spi0: spi@01c05000 {
+			interrupts = <10>;
+			status = "okay";
+
+			nor_flash@0 {
+				#address-cells = <1>;
+				#size-cells = <1>;
+				compatible = "st,m25p64";
+				spi-max-frequency = <0x989680>;
+				reg = <0>;	/* Chip select 0 */
+			};
+		};
+
+		twi0: twi@0x01c27000{
+			clock-frequency = <100000>;
+			status = "okay";
+
+			rtc@0x51 {
+				compatible = "nxp,pcf8563";
+				i2c-max-frequency = <100000>;
+				reg = <0x51>;
+			};
+
+			io_expand@0x20 {
+				compatible = "ti,pcf8574a";
+				i2c-max-frequency = <100000>;
+				reg = <0x20>;
+			};
+
+			sensor_ov5640@0x78{
+				compatible = "allwinner,sensor_ov5640";
+				i2c-max-frequency = <100000>;
+				reg = <0x78>;
+				status = "okay";
+			};
+        };
+
+
+		twi1: twi@0x01c27400{
+			interrupts = <8>;
+			status = "okay";
+		};
+	};
+};
+
+
+/*&spi1 {
+       status = "okay";
+       pinctrl-0 = <&spi1_pins_a>;
+       pinctrl-names = "default";
+       ili9341@0 {
+               compatible = "ilitek,ili9341";
+               reg = <0>;
+               spi-max-frequency = <50000000>;   /*96m
+               bgr;
+	       	   rotate = <180>;
+               fps = <30>;
+               buswidth = <8>;
+               reset-gpios = <&pio 4 11 GPIO_ACTIVE_LOW>;
+               dc-gpios = <&pio 4 10 GPIO_ACTIVE_LOW>;/*initial seq  gamma 
+               debug = <0>;
+       };
+};*/
+
+&uart0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart0_pins_a>;
+	status = "okay";
+};

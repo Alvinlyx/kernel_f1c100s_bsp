@@ -1,0 +1,6 @@
+kernel/drivers/video/fbtft/fb_ili9341.ko:
+kernel/drivers/video/fbtft/flexfb.ko:
+kernel/drivers/video/fbtft/fbtft_device.ko:
+kernel/drivers/net/wireless/xradio/umac/xradio_mac.ko:
+kernel/drivers/net/wireless/xradio/wlan/xradio_core.ko: kernel/drivers/net/wireless/xradio/umac/xradio_mac.ko
+kernel/drivers/net/wireless/xradio/wlan/xradio_wlan.ko: kernel/drivers/net/wireless/xradio/wlan/xradio_core.ko kernel/drivers/net/wireless/xradio/umac/xradio_mac.ko

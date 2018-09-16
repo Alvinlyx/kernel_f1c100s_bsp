@@ -1,0 +1,32 @@
+/*
+ * Allwinner Technology CO., Ltd. sunivw1p1 evb board.
+ *
+ * evb board support.
+ */
+
+/dts-v1/;
+#include "sunivw1p1.dtsi"
+
+/ {
+
+  	memory@80000000 {
+		reg = <0x00000000 0x80000000 0x00000000 0x2000000>;
+	};
+};
+
+
+&spi1 {
+       status = "okay";
+       ili9341@0 {
+           compatible = "ilitek,ili9341";
+           reg = <0>;
+           spi-max-frequency = <50000000>;   /*96m*/
+           bgr;
+       	   rotate = <180>;
+           fps = <30>;
+           buswidth = <8>;
+           reset-gpios = <&pio PE 11 1 1 1 1 1>;
+           dc-gpios = <&pio PE 10 1 1 1 1 1>;/*initial seq  gamma */
+           debug = <0>;
+       };
+};
